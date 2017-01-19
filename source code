@@ -25,9 +25,9 @@ info = output[u'data']
 
 masterlist = []
 
-# this is currently grabbing the date of post, who posted it, title of link posted, link url, number of likes and comments \
-and appending a list of the data for each post to a master list. if some of that data is not present, it will append an error \
-integer or string instead
+# this is currently grabbing the date of post, who posted it, title of link posted, link url, number of likes and comments
+# and appending a list of the data for each post to a master list. if some of that data is not present, it will append an error
+# integer or string instead
 
 def scrape_data(a):
     for i in a:
@@ -54,7 +54,7 @@ def scrape_data(a):
         
 scrape_data(info)
 
-# prints all collected data for each post on one line with comma seperators then data for next post on new line etc
+# prints all collected data for each post on one line with comma seperators then data for next post on new line and so on
 for item in masterlist:
     try:
         print ", ".join(map(str, item[0:]))
