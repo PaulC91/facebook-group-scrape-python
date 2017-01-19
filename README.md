@@ -1,5 +1,4 @@
-# hello-world
-Beginner project scraping and analysing a private facebook group with python
+# hello-world: Beginner project scraping and analysing a private facebook group with python
 
 I started this small project with a friend out of a want to start learning some python and also to try and archive the contents of a private facebook i'm in with some friends that we use to share music with each other (primarily youtube links). 
 
