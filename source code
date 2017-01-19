@@ -1,0 +1,47 @@
+from facepy import GraphAPI
+import json
+
+graph = GraphAPI("Access Token Code Here")
+
+group_id = "add group id from url here"
+
+data = graph.get(group_id+'/feed',page=False,limit=100,since="yyyy-mm-dd",until="yyyy-mm-dd")
+
+jsonposts = json.dumps(data)
+
+output = json.loads(jsonposts)
+
+info = output[u'data']
+
+masterlist = []
+
+def scrape_data(a):
+    for i in a:
+        minorlist = []
+        minorlist.append(i[u'created_time'])
+        minorlist.append(i[u'from'][u'name'])
+        try:
+            minorlist.append(i[u'name'])
+        except:
+            minorlist.append("No Link")
+        try:
+            minorlist.append(i[u'link'])
+        except:
+            minorlist.append("No URL")
+        try:
+            minorlist.append(len(i[u'likes'][u'data']))
+        except KeyError:
+            minorlist.append(0)
+        try:
+            minorlist.append(len(i[u'comments'][u'data']))
+        except KeyError:
+            minorlist.append("No Comments :(")
+        masterlist.append(minorlist)
+        
+scrape_data(info)
+
+for item in masterlist:
+    try:
+        print ", ".join(map(str, item[0:]))
+    except UnicodeEncodeError:
+        pass
