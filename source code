@@ -1,10 +1,20 @@
+
+# current code that I am running. contains a lot of try, except, error handling due to a lot of inconsistent json data
+# i'm sure there's far more efficient ways to do this so any suggestions are welcome!
+# things i'm working on: 
+# saving output to csv
+# best way to plot number of posts, likes and comments against time
+
 from facepy import GraphAPI
 import json
 
-graph = GraphAPI("Access Token Code Here")
+# paste in an access token from the facebook developers graph API (need to sign up with your fb account logged in)
+graph = GraphAPI("")
 
-group_id = "add group id from url here"
+# paste the group id from url of a group you are an admin of
+group_id = ""
 
+#change limit, since and until to edit the number of posts to retreive or from what time period
 data = graph.get(group_id+'/feed',page=False,limit=100,since="yyyy-mm-dd",until="yyyy-mm-dd")
 
 jsonposts = json.dumps(data)
@@ -14,6 +24,10 @@ output = json.loads(jsonposts)
 info = output[u'data']
 
 masterlist = []
+
+# this is currently grabbing the date of post, who posted it, title of link posted, link url, number of likes and comments \
+and appending a list of the data for each post to a master list. if some of that data is not present, it will append an error \
+integer or string instead
 
 def scrape_data(a):
     for i in a:
@@ -40,6 +54,7 @@ def scrape_data(a):
         
 scrape_data(info)
 
+# prints all collected data for each post on one line with comma seperators then data for next post on new line etc
 for item in masterlist:
     try:
         print ", ".join(map(str, item[0:]))
